@@ -19,6 +19,8 @@ USB Usb;
 XBOXRECV Xbox(&Usb);
 Servo left;
 Servo right;
+int ledPin = 13;
+
 
 void arm(){
  // arm the speed controller, modify as necessary for your ESC  
@@ -59,6 +61,7 @@ void setup() {
   }
   Serial.print(F("\r\nXbox Wireless Receiver Library Started"));
 
+  pinMode(13, OUTPUT);
   left.attach(8);
   right.attach(7);
   arm();
@@ -147,9 +150,11 @@ void loop() {
 
         if (Xbox.getButtonClick(A, i)){
           Serial.println(F("A"));
+          digitalWrite(ledPin, HIGH);
         }
         if (Xbox.getButtonClick(B, i)){
           Serial.println(F("B"));
+          digitalWrite(ledPin, LOW);
         }
         if (Xbox.getButtonClick(X, i)){
           Serial.println(F("X"));
